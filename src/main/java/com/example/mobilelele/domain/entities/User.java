@@ -1,9 +1,11 @@
-package com.example.mobilelele.model.entities;
+package com.example.mobilelele.domain.entities;
 
-import com.example.mobilelele.model.entities.enums.Role;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,19 +15,19 @@ public class User extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String username;
 
-    @Column(nullable = false)
+    @Column
     private String password;
 
-    @Column(name = "first-name", nullable = false)
+    @Column(name = "first-name")
     private String firstName;
 
-    @Column(name = "last-name", nullable = false)
+    @Column(name = "last-name")
     private String lastName;
 
-    @Column(name = "is-active", nullable = false)
+    @Column(name = "is-active")
     private Boolean isActive;
 
-    @ManyToOne
+    @OneToOne
     private UserRole role;
 
     @Column(name = "image-url")
@@ -34,8 +36,8 @@ public class User extends BaseEntity {
     @Column(name = "created-on")
     private LocalDateTime created;
 
-    @Column(name = "created-on")
-    private LocalDate modified;
+    @Column(name = "modified-on")
+    private LocalDateTime modified;
 
     public User() {
     }
@@ -44,71 +46,80 @@ public class User extends BaseEntity {
         return username;
     }
 
-    public void setUsername(String username) {
+    public User setUsername(String username) {
         this.username = username;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public User setFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public User setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
     }
 
     public Boolean getActive() {
         return isActive;
     }
 
-    public void setActive(Boolean active) {
+    public User setActive(Boolean active) {
         isActive = active;
+        return this;
     }
 
     public UserRole getRole() {
         return role;
     }
 
-    public void setRole(UserRole role) {
+    public User setRole(UserRole role) {
         this.role = role;
+        return this;
     }
 
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public User setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
     }
 
     public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public User setCreated(LocalDateTime created) {
         this.created = created;
+        return this;
     }
 
-    public LocalDate getModified() {
+    public LocalDateTime getModified() {
         return modified;
     }
 
-    public void setModified(LocalDate modified) {
+    public User setModified(LocalDateTime modified) {
         this.modified = modified;
+        return this;
     }
 }

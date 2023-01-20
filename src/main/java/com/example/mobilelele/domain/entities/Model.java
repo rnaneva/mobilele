@@ -1,18 +1,20 @@
-package com.example.mobilelele.model.entities;
+package com.example.mobilelele.domain.entities;
 
-import com.example.mobilelele.model.entities.enums.Category;
-import javax.persistence.*;
-import javax.validation.constraints.Size;
+import com.example.mobilelele.domain.entities.enums.Category;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
+
+
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "models")
 public class Model extends BaseEntity {
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String name;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated
     private Category category;
 
     @Size(min= 8, max = 512)
@@ -36,67 +38,75 @@ public class Model extends BaseEntity {
 
     public Model(){}
 
-    public void setName(String name){
-        this.name = name;
+    public String getName() {
+        return name;
     }
 
-    public String getName(){
-        return this.name;
+    public Model setName(String name) {
+        this.name = name;
+        return this;
     }
 
     public Category getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public Model setCategory(Category category) {
         this.category = category;
+        return this;
     }
 
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public Model setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
     }
 
     public Integer getStartYear() {
         return startYear;
     }
 
-    public void setStartYear(Integer startYear) {
+    public Model setStartYear(Integer startYear) {
         this.startYear = startYear;
+        return this;
     }
 
     public String getEndYear() {
         return endYear;
     }
 
-    public void setEndYear(String endYear) {
+    public Model setEndYear(String endYear) {
         this.endYear = endYear;
+        return this;
     }
 
     public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public Model setCreated(LocalDateTime created) {
         this.created = created;
+        return this;
     }
 
     public LocalDateTime getModified() {
         return modified;
     }
 
-    public void setModified(LocalDateTime modified) {
+    public Model setModified(LocalDateTime modified) {
         this.modified = modified;
+        return this;
     }
 
     public Brand getBrand() {
         return brand;
     }
 
-    public void setBrand(Brand brand) {
+    public Model setBrand(Brand brand) {
         this.brand = brand;
+        return this;
     }
 }

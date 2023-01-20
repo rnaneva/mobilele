@@ -1,10 +1,9 @@
-package com.example.mobilelele.model.entities;
+package com.example.mobilelele.domain.entities;
 
-import com.example.mobilelele.model.entities.enums.Engine;
-import com.example.mobilelele.model.entities.enums.Transmission;
+import com.example.mobilelele.domain.entities.enums.Engine;
+import com.example.mobilelele.domain.entities.enums.Transmission;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.Year;
@@ -16,33 +15,31 @@ public class Offer extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated
     private Engine engine;
 
     @Column(name = "image-url")
     private String imageUrl;
 
-    @Basic
-    private int mileage;
+    @Column
+    private Integer mileage;
 
-    @Column(nullable = false)
-    @Positive
     private BigDecimal price;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated
     private Transmission transmission;
 
-    @Column(nullable = false)
+    @Column
     private Year year;
 
-    @Column(name = "created-on", nullable = false)
+    @Column(name = "created-on")
     private LocalDateTime created;
 
-    @Column(name = "modified-on", nullable = false)
+    @Column(name = "modified-on")
     private LocalDateTime modified;
 
-    @Column(nullable = false)
-    private String model;
+    @OneToOne
+    private Model model;
 
     @OneToOne
     private User seller;
@@ -55,87 +52,98 @@ public class Offer extends BaseEntity {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Offer setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public Engine getEngine() {
         return engine;
     }
 
-    public void setEngine(Engine engine) {
+    public Offer setEngine(Engine engine) {
         this.engine = engine;
+        return this;
     }
 
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public Offer setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
     }
 
     public int getMileage() {
         return mileage;
     }
 
-    public void setMileage(int mileage) {
+    public Offer setMileage(int mileage) {
         this.mileage = mileage;
+        return this;
     }
 
     public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public Offer setPrice(BigDecimal price) {
         this.price = price;
+        return this;
     }
 
     public Transmission getTransmission() {
         return transmission;
     }
 
-    public void setTransmission(Transmission transmission) {
+    public Offer setTransmission(Transmission transmission) {
         this.transmission = transmission;
+        return this;
     }
 
     public Year getYear() {
         return year;
     }
 
-    public void setYear(Year year) {
+    public Offer setYear(Year year) {
         this.year = year;
+        return this;
     }
 
     public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public Offer setCreated(LocalDateTime created) {
         this.created = created;
+        return this;
     }
 
     public LocalDateTime getModified() {
         return modified;
     }
 
-    public void setModified(LocalDateTime modified) {
+    public Offer setModified(LocalDateTime modified) {
         this.modified = modified;
+        return this;
     }
 
-    public String getModel() {
+    public Model getModel() {
         return model;
     }
 
-    public void setModel(String model) {
+    public Offer setModel(Model model) {
         this.model = model;
+        return this;
     }
 
     public User getSeller() {
         return seller;
     }
 
-    public void setSeller(User seller) {
+    public Offer setSeller(User seller) {
         this.seller = seller;
+        return this;
     }
 }

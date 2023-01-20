@@ -1,8 +1,10 @@
-package com.example.mobilelele.model.entities;
+package com.example.mobilelele.domain.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,11 +14,9 @@ public class Brand extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @Column(name = "created-on")
-    private LocalDateTime created;
-
     @Column(name = "modified-on")
     private LocalDateTime modified;
+
 
     public Brand(){}
 
@@ -24,23 +24,17 @@ public class Brand extends BaseEntity {
         return name;
     }
 
-    public void setName(String name) {
+    public Brand setName(String name) {
         this.name = name;
-    }
-
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
+        return this;
     }
 
     public LocalDateTime getModified() {
         return modified;
     }
 
-    public void setModified(LocalDateTime modified) {
+    public Brand setModified(LocalDateTime modified) {
         this.modified = modified;
+        return this;
     }
 }
