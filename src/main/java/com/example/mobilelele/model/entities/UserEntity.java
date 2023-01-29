@@ -120,4 +120,6 @@ public class UserEntity extends BaseEntity {
         this.modified = modified;
         return this;
     }
+
+
 }

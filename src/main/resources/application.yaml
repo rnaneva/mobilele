@@ -11,6 +11,9 @@ spring:
         format_sql: 'TRUE'
     hibernate:
       ddl-auto: update
+#  sql:
+#    init:
+#      mode: always
 logging:
   level:
     org:

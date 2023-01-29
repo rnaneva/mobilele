@@ -1,32 +1,58 @@
 package com.example.mobilelele.web;
 
-import com.example.mobilelele.model.dtos.banding.UserRegisterFormDto;
-import com.example.mobilelele.service.userRole.UserRoleService;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.mobilelele.model.dtos.UserLoginDTO;
+import com.example.mobilelele.model.dtos.UserRegisterDTO;
+import com.example.mobilelele.service.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/users")
-public class UserController extends BaseController {
-    private UserRoleService userRoleService;
+public class UserController {
 
-    @Autowired
-    public UserController(UserRoleService userRoleService) {
-        this.userRoleService = userRoleService;
+    private UserService userService;
+    private ModelMapper modelMapper;
+
+    public UserController(ModelMapper modelMapper, UserService userService) {
+        this.userService = userService;
+        this.modelMapper = modelMapper;
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "auth-login";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        userService.logout();
+        return "redirect:/";
     }
 
     @GetMapping("/register")
-    public ModelAndView getRegister(ModelAndView modelAndView) {
-        modelAndView.addObject("role", "USER");
-        return super.view("auth-register", modelAndView);
+    public String register(){
+        return "auth-register";
     }
 
-    public ModelAndView postRegister(UserRegisterFormDto userRegisterFormDto){
-        return super.redirect("auth-login");
+    @PostMapping("/login")
+    private String login(UserLoginDTO userLoginDTO){
+        userService.login(userLoginDTO);
+        return "redirect:/";
     }
+
+    @PostMapping("/register")
+    private String register(UserRegisterDTO userRegisterDTO){
+        userService.register(userRegisterDTO);
+
+        return "redirect:/login";
+    }
+
+
+
 
 
 }
