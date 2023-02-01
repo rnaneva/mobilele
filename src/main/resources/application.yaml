@@ -1,9 +1,9 @@
 spring:
   datasource:
-    username: root
     url: jdbc:mysql://localhost:3306/mobilelele?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
     driverClassName: com.mysql.cj.jdbc.Driver
-    password: '1234'
+    username: root
+    password: 1234
   jpa:
     properties:
       hibernate:
@@ -11,6 +11,7 @@ spring:
         format_sql: 'TRUE'
     hibernate:
       ddl-auto: update
+    defer-datasource-initialization: true
 #  sql:
 #    init:
 #      mode: always

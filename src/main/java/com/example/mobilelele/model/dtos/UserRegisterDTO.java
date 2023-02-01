@@ -1,10 +1,25 @@
 package com.example.mobilelele.model.dtos;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
 public class UserRegisterDTO {
 
+    @NotEmpty
+    @Size(min = 2, max = 20)
     private String firstName;
+
+    @NotEmpty
+    @Size(min = 2, max = 20)
     private String lastName;
-    private String username;
+
+    @Email
+    @NotEmpty
+    private String email;
+
+    @NotEmpty
+    @Size(min = 5)
     private String password;
     private String confirmPassword;
 
@@ -37,12 +52,12 @@ public class UserRegisterDTO {
     }
 
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public UserRegisterDTO setUsername(String username) {
-        this.username = username;
+    public UserRegisterDTO setEmail(String email) {
+        this.email = email;
         return this;
     }
 

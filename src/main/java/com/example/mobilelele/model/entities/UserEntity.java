@@ -11,41 +11,48 @@ import java.util.List;
 public class UserEntity extends BaseEntity {
 
     @Column(unique = true, nullable = false)
-    private String username;
+    private String email;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
-    @Column(name = "first-name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last-name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "is-active")
+    @Column(name = "is_active")
     private Boolean isActive;
 
     @OneToMany
     private List<RoleEntity> roles;
 
-    @Column(name = "image-url")
+    @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "created-on")
     private LocalDateTime created;
 
-    @Column(name = "modified-on")
     private LocalDateTime modified;
 
     public UserEntity() {
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public UserEntity setUsername(String username) {
-        this.username = username;
+    public UserEntity setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public List<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public UserEntity setRoles(List<RoleEntity> roles) {
+        this.roles = roles;
         return this;
     }
 
@@ -121,5 +128,18 @@ public class UserEntity extends BaseEntity {
         return this;
     }
 
-
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "email='" + email + '\'' +
+                ", password='" + (password != null ? "PROVIDED" : null)  + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", isActive=" + isActive +
+                ", roles=" + roles +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", created=" + created +
+                ", modified=" + modified +
+                '}';
+    }
 }

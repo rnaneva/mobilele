@@ -26,4 +26,11 @@ public class RoleEntity extends BaseEntity{
         this.name = name;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "RoleEntity{" +
+                "name=" + name +
+                '}';
+    }
 }

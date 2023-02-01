@@ -18,10 +18,10 @@ public class OfferEntity extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Engine engine;
 
-    @Column(name = "image-url")
+    @Column(name = "image_url")
     private String imageUrl;
 
     @Column
@@ -35,10 +35,8 @@ public class OfferEntity extends BaseEntity {
     @Column
     private Year year;
 
-    @Column(name = "created-on")
     private LocalDateTime created;
 
-    @Column(name = "modified-on")
     private LocalDateTime modified;
 
     @OneToOne
@@ -154,5 +152,22 @@ public class OfferEntity extends BaseEntity {
     public OfferEntity setSeller(UserEntity seller) {
         this.seller = seller;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "OfferEntity{" +
+                "description='" + description + '\'' +
+                ", engine=" + engine +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", mileage=" + mileage +
+                ", price=" + price +
+                ", transmission=" + transmission +
+                ", year=" + year +
+                ", created=" + created +
+                ", modified=" + modified +
+                ", model=" + model +
+                ", seller=" + seller +
+                '}';
     }
 }

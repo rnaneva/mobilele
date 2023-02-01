@@ -13,11 +13,11 @@ public class BrandEntity extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @Column(name = "created-on")
+    @Column
     private LocalDateTime created;
 
 
-    @Column(name = "modified-on")
+    @Column
     private LocalDateTime modified;
 
     @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -60,5 +60,15 @@ public class BrandEntity extends BaseEntity {
     public BrandEntity setModified(LocalDateTime modified) {
         this.modified = modified;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "BrandEntity{" +
+                "name='" + name + '\'' +
+                ", created=" + created +
+                ", modified=" + modified +
+                ", models=" + models +
+                '}';
     }
 }

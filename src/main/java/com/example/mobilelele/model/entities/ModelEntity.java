@@ -17,20 +17,20 @@ public class ModelEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private CategoryEnum category;
 
-    @Size(min= 8, max = 512)
-    @Column(name = "image-url")
+//    @Size(min= 8, max = 512)
+    @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "start-year")
+    @Column(name = "start_year")
     private Integer startYear;
 
-    @Column(name = "end-year")
+    @Column(name = "end_year")
     private String endYear;
 
-    @Column(name = "crated-on")
+
     private LocalDateTime created;
 
-    @Column(name = "modified-on")
+
     private LocalDateTime modified;
 
     @ManyToOne
@@ -108,5 +108,19 @@ public class ModelEntity extends BaseEntity {
     public ModelEntity setBrand(BrandEntity brand) {
         this.brand = brand;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "ModelEntity{" +
+                "name='" + name + '\'' +
+                ", category=" + category +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", startYear=" + startYear +
+                ", endYear='" + endYear + '\'' +
+                ", created=" + created +
+                ", modified=" + modified +
+                ", brand=" + brand +
+                '}';
     }
 }

@@ -9,16 +9,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.Optional;
 
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
-    private Logger LOGGER = LoggerFactory.getLogger(UserService.class);
-    private CurrentUser currentUser;
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+    private final CurrentUser currentUser;
+    private final PasswordEncoder passwordEncoder;
 
     public UserService(UserRepository userRepository, CurrentUser currentUser, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -26,13 +27,14 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public boolean login(UserLoginDTO userLoginDTO){
-        Optional<UserEntity> optionalUser =
-                userRepository.findByUsername(userLoginDTO.getUsername());
+    public void login(UserLoginDTO userLoginDTO) {
 
-        if(optionalUser.isEmpty()){
-            LOGGER.debug("User not found: [{}]", userLoginDTO.getUsername());
-            return false;
+        Optional<UserEntity> optionalUser =
+                userRepository.findByEmail(userLoginDTO.getEmail());
+
+        if (optionalUser.isEmpty()) {
+            LOGGER.info("User not found: [{}]", userLoginDTO.getEmail());
+            return;
         }
 
         String rawPassword = userLoginDTO.getPassword();
@@ -41,38 +43,32 @@ public class UserService {
         boolean success = passwordEncoder.matches(rawPassword, hashedPassword);
 
 
-        if(success){
-            currentUser.setLoggedIn(true)
-                    .setName(optionalUser.get().getFirstName() + " " + optionalUser.get().getLastName());
-
-        } else{
+        if (success) {
+            currentUser.setName(optionalUser.get().getFirstName() + " " + optionalUser.get().getLastName());
+        } else {
             logout();
         }
 
-        return success;
     }
 
 
-
-    public void logout(){
+    public void logout() {
         currentUser.clear();
     }
 
-    public void register(UserRegisterDTO userRegisterDTO){
+    public void register(UserRegisterDTO userRegisterDTO) {
 
-        if(userRegisterDTO.getPassword() != userRegisterDTO.getConfirmPassword()){
-            // todo
-        }
 
         UserEntity user = new UserEntity()
                 .setFirstName(userRegisterDTO.getFirstName())
                 .setLastName(userRegisterDTO.getLastName())
-                .setUsername(userRegisterDTO.getUsername())
+                .setEmail(userRegisterDTO.getEmail())
                 .setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
 
         userRepository.save(user);
 
     }
+
 
 
 }
